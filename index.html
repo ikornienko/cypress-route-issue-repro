@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cypress "%2F in query param" Issue</title>
+    <meta charset="UTF-8" />
+    <script>
+        function onPlainClick() {
+            const xhrPlain = new XMLHttpRequest();
+            xhrPlain.open('GET', 'api/issue?param=plain');
+            xhrPlain.send();
+        }
+
+        function onPathClick() {
+            const xhrPath = new XMLHttpRequest();
+            xhrPath.open('GET', `api/issue?param=${encodeURIComponent('/path/to/something')}`);
+            xhrPath.send();
+        }
+    </script>
+  </head>
+
+  <body>
+      <button id="button-plain" onclick="onPlainClick()">Plain Query</button>
+      <button id="button-path" onclick="onPathClick()">Query with %2F</button>
+  </body>
+</html>

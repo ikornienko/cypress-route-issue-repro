@@ -1,0 +1,19 @@
+{
+  "name": "cypress-route-issue-repro",
+  "version": "0.0.0",
+  "description": "Reproducing Cypress 'route with %2F' issue",
+  "author": "Ivan Kornienko",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js &",
+    "kill": "kill $(lsof -t -i:3001)",
+    "reproduce": "npm run start && wait-on http://localhost:3001 && cypress run; npm run kill",
+    "open-cypress": "cypress open"
+  },
+  "dependencies": {
+    "cypress": "^4.4.0",
+    "express": "^4.17.1",
+    "wait-on": "^4.0.2"
+  }
+}
