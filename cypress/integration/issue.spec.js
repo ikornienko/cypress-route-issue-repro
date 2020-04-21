@@ -6,10 +6,15 @@ describe('Cypress route', () => {
     cy.route('/api/issue*').as('api-issue');
     cy.visit('issue');
 
-    cy.get('#button-plain').click();
-    cy.wait('@api-issue');
+    cy.get('#button-plain').click(); // makes GET request to /api/issue?param=plain
+    cy.wait('@api-issue'); // successfully waits
 
-    cy.get('#button-path').click();
-    cy.wait('@api-issue');
+    // logs true
+    console.log(Cypress.minimatch('/api/issue?param=%2Fpath%2Fto%2Fsomething', `/api/issue*`, {
+      matchBase: true
+    }));
+
+    cy.get('#button-path').click(); // makes GET request to /api/issue?param=%2Fpath%2Fto%2Fsomething
+    cy.wait('@api-issue'); // fails waiting here
   });
 });
